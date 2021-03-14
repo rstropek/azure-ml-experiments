@@ -1,0 +1,6 @@
+__pycache__
+output
+.config
+.amlignore
+*.amltmp
+.ipynb_aml_checkpoints
