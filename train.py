@@ -18,10 +18,11 @@ nltk.download('wordnet')
 run = Run.get_context()
 ws = run.experiment.workspace
 
-ds = Datastore.get(ws, datastore_name='stdatasciencelab')
-print(ds)
+#ds = Datastore.get(ws, datastore_name='stdatasciencelab')
+#df = Dataset.Tabular.from_json_lines_files(path = [(ds, '/train.jl')]).to_pandas_dataframe()
+URL = 'https://cddataexchange.blob.core.windows.net/data-exchange/train.jl'
+df = Dataset.Tabular.from_json_lines_files(path = URL).to_pandas_dataframe()
 
-df = Dataset.Tabular.from_json_lines_files(path = [(ds, '/train.jl')]).to_pandas_dataframe()
 X_train = df['ingredients'].apply(preprocess)
 Y_train = df['cuisine']
 
