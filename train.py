@@ -6,6 +6,7 @@ import glob
 import joblib
 from azureml.core import Workspace, Dataset, Datastore, Run
 from azureml.data.datapath import DataPath
+import sklearn
 from sklearn.linear_model import LogisticRegression
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.naive_bayes import MultinomialNB
@@ -33,11 +34,11 @@ mnb.fit(X_train_vec, Y_train)
 X_test = vectorizer2.transform(X_train)
 mnb.predict(X_test)
 os.makedirs('outputs', exist_ok=True)
-joblib.dump(value=mnb, filename='output/mnb_model.pkl')
+joblib.dump(value=mnb, filename='outputs/mnb_model.pkl')
 
 Model.register(workspace = ws,
     model_name='mnb-cooking',
     tags={'kind': 'demo'},
-    model_path='./output/mnb_model.pkl',
+    model_path='./outputs/mnb_model.pkl',
     model_framework = Model.Framework.SCIKITLEARN,
     model_framework_version = sklearn.__version__)
